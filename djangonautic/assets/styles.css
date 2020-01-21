@@ -1,0 +1,20 @@
+body{
+  background-color: #0f121f;
+  background-image: url(stars.png);
+  background-repeat-y: yes;
+  color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-weight: normal;
+  margin: 0;
+}
+
+body *{
+  font-family: Ubuntu;
+}
+
+a, a:hover, a:visited{
+  color: #fff;
+  text-decoration: none;
+}
