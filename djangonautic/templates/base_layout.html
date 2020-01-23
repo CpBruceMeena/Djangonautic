@@ -8,19 +8,28 @@
     <link rel="stylesheet" href="{% static 'styles.css'%}">
   </head>
   <body>
-    <div class="wrapper">
+    <header class="wrapper">
       <h1><a href="{% url 'articles:list'%}"><img src="{% static 'logo.png' %}" alt=""></a></h1>
       <nav>
-        <li>
-          <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-          </form>
-        </li>
-      </nav>
-     {% block content %}
+        <ul>
+          {% if user.is_authenticated %}
+          <li>
+            <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Logout</button>
+            </form>
+          </li>
+          <a href="{% url 'articles:create'%}">New Article</a>
+          {% else %}
+            <li><a href="{% url 'accounts:login'%}">Login</a></li>
+            <li><a href="{% url 'accounts:signup'%}">Sign Up</a></li>
 
-      {% endblock %}
-    </div>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    {% block content %}
+
+     {% endblock %}
   </body>
 </html>
