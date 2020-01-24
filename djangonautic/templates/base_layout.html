@@ -5,11 +5,162 @@
   <head>
     <meta charset="utf-8">
     <title>Articles</title>
-    <link rel="stylesheet" href="{% static 'styles.css'%}">
+    <style type='text/css'>
+    body{
+      background-color: #0f121f;
+      background-image: url("https://apod.nasa.gov/apod/image/1910/MilkyWaySaltFlat_Huerta_2048.jpg");
+      color: #fff;
+      background-size: cover;
+      /* background-repeat: repeat-y; */
+      /* background-repeat: repeat-x; */
+    }
+
+    h1, h2, h3, h4, h5, h6{
+      font-weight: normal;
+      margin: 0;
+    }
+
+    body *{
+      font-family: Ubuntu;
+    }
+
+    a, a:hover, a:visited{
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .wrapper{
+      max-width: 960px;
+      margin: 0px auto;
+    }
+
+    div.wrapper h1{
+      text-align : center;
+      margin: 100px auto;
+      font-size: 2.4em;
+    }
+
+    header{
+      display: grid;
+      grid-template-column: 1fr 1fr;
+      padding: 20px 0;
+    }
+
+    nav{
+      justify-self: end;
+    }
+
+    nav li{
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+    nav button{
+      background: none;
+      color: #fff;
+      cursor: pointer;
+      border: 0px;
+      font-size: 1em;
+    }
+
+    .articles {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 30px;
+    }
+
+    .article{
+      padding: 10px;
+      border: 1px solid #00dba0;
+      position: relative;
+      padding-bottom: 40px;
+    }
+
+    .article h2{
+      font-size: 1.2em;
+    }
+
+    .article .author{
+      padding: 10px;
+      background: #00dba0;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 0;
+      color: #0f121f;
+    }
+
+    .article-detail .article{
+      padding: 0;
+    }
+
+    .article-detail .article img{
+      max-width: 100%;
+    }
+
+    .article-detail .article h2{
+      text-align: center;
+      margin: 20px auto;
+      font-size: 2em;
+    }
+
+    .article-detail .article p{
+      text-align: center;
+    }
+
+    .site-form{
+      margin-top: 60px;
+      border: 1px solid #00dba0;
+      padding: 20px;
+    }
+
+    .site-form input, .site-form textarea{
+      display: block;
+      margin: 20px 0 0 0;
+      padding: 10px;
+    }
+
+    a.highlight{
+        border: 1px solid #00dba0;
+        padding: 10px;
+        border-radius: 4px;
+        color: #00dba0;
+    }
+
+    .helptext, helptext ul{
+        margin: 0 auto 20px;
+        color: #bbb;
+        font-size: 0.9em;
+        display: block;
+    }
+
+    .errorlist li{
+      padding: 10px;
+      list-style-type: none;
+      border: 1px solid #ff5722;
+      color: #ff5722;
+      margin: 10px 0;
+    }
+
+    .errorlist{
+      padding: 0;
+    }
+
+    .site-form input[type='submit']{
+      background-color: #00dba0;
+      border: 0;
+      color: #fff;
+      font-size: 1.2em;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+
+    </style>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
   </head>
   <body>
     <header class="wrapper">
-      <h1><a href="{% url 'articles:list'%}"><img src="{% static 'logo.png' %}" alt=""></a></h1>
+      <h1><a href="{% url 'home'%}"><img src="{% static 'logo.png' %}" alt=""></a></h1>
       <nav>
         <ul>
           {% if user.is_authenticated %}
@@ -19,7 +170,7 @@
               <button type="submit">Logout</button>
             </form>
           </li>
-          <a href="{% url 'articles:create'%}">New Article</a>
+          <a href="{% url 'articles:create'%}" class='highlight'>New Article</a>
           {% else %}
             <li><a href="{% url 'accounts:login'%}">Login</a></li>
             <li><a href="{% url 'accounts:signup'%}">Sign Up</a></li>
@@ -28,8 +179,11 @@
         </ul>
       </nav>
     </header>
-    {% block content %}
+    <div class="wrapper">
+      {% block content %}
 
-     {% endblock %}
+      {% endblock %}
+    </div>
+
   </body>
 </html>
